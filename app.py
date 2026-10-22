@@ -109,7 +109,7 @@ with tab_calendar:
         elif val == 'rejected': return 'background-color: #f8d7da; color: #721c24'
         else: return 'background-color: #fff3cd; color: #856404'
 
-    st.dataframe(df.style.applymap(color_status, subset=['qa_status']), use_container_width=True)
+    st.dataframe(df.style.map(color_status, subset=['qa_status']), use_container_width=True)
 
     st.markdown("### 🛠️ Quick Quality Action")
     selected_index = st.selectbox("Select post to review", options=df.index, format_func=lambda x: f"Row {x}: {df.iloc[x]['concept']}")
