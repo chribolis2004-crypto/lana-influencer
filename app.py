@@ -7,27 +7,30 @@ st.set_page_config(page_title="Lana | Content Studio", layout="wide", page_icon=
 
 # --- API KEY MANAGEMENT ---
 def get_gemini_api_key():
-    # 1. Try Streamlit Secrets
-    if "GEMINI_API_KEY" in st.secrets:
-        return st.secrets["GEMINI_API_KEY"]
+    try:
+        if "GEMINI_API_KEY" in st.secrets:
+            return st.secrets["GEMINI_API_KEY"]
+    except Exception:
+        pass
 
-    # 2. Try Environment Variables
-    env_key = os.getenv("GEMINI_API_KEY")
-    if env_key:
-        return env_key
+    if os.getenv("GEMINI_API_KEY"):
+        return os.getenv("GEMINI_API_KEY")
 
-    # 3. Fallback: Sidebar Input
+    return None
+
+# Retrieve the key at the start
+api_key_val = get_gemini_api_key()
+
+if not api_key_val:
     st.sidebar.warning("🔑 API Key mancante")
     user_key = st.sidebar.text_input("Inserisci la tua GEMINI_API_KEY", type="password")
     if user_key:
-        return user_key
-
-    # Block execution if no key is provided
-    st.sidebar.error("L'app è bloccata. Inserisci la chiave API nella sidebar per continuare.")
-    st.stop()
-
-# Retrieve the key at the start
-gemini_api_key = get_gemini_api_key()
+        gemini_api_key = user_key
+    else:
+        st.sidebar.error("L'app è bloccata. Inserisci la chiave API nella sidebar per continuare.")
+        st.stop()
+else:
+    gemini_api_key = api_key_val
 
 # Custom CSS for SaaS look
 st.markdown("""
@@ -187,6 +190,6 @@ with tab_publish:
                     st.text(result.stdout)
                     if result.returncode == 0:
                         st.success("Forced publication complete!")
-                        st.rerun()
+                    st.rerun()
     else:
         st.info("The queue is currently empty. Approve more posts and generate assets to fill the pipeline.")
