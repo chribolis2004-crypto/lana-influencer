@@ -5,6 +5,30 @@ import subprocess
 
 st.set_page_config(page_title="Lana | Content Studio", layout="wide", page_icon="🌸")
 
+# --- API KEY MANAGEMENT ---
+def get_gemini_api_key():
+    # 1. Try Streamlit Secrets
+    if "GEMINI_API_KEY" in st.secrets:
+        return st.secrets["GEMINI_API_KEY"]
+
+    # 2. Try Environment Variables
+    env_key = os.getenv("GEMINI_API_KEY")
+    if env_key:
+        return env_key
+
+    # 3. Fallback: Sidebar Input
+    st.sidebar.warning("🔑 API Key mancante")
+    user_key = st.sidebar.text_input("Inserisci la tua GEMINI_API_KEY", type="password")
+    if user_key:
+        return user_key
+
+    # Block execution if no key is provided
+    st.sidebar.error("L'app è bloccata. Inserisci la chiave API nella sidebar per continuare.")
+    st.stop()
+
+# Retrieve the key at the start
+gemini_api_key = get_gemini_api_key()
+
 # Custom CSS for SaaS look
 st.markdown("""
     <style>
@@ -97,7 +121,10 @@ with tab_studio:
     # Action button positioned at the top
     if st.button("🚀 Generate All Ready Assets", use_container_width=True):
         with st.spinner("Google Gemini is creating your assets..."):
-            result = subprocess.run(['python', 'asset_generator.py'], capture_output=True, text=True)
+            # We inject the API key into the environment for the subprocess
+            env = os.environ.copy()
+            env["GEMINI_API_KEY"] = gemini_api_key
+            result = subprocess.run(['python', 'asset_generator.py'], capture_output=True, text=True, env=env)
             if result.returncode == 0:
                 st.success("Assets generated successfully!")
                 st.rerun()
