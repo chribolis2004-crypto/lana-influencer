@@ -1,0 +1,15 @@
+brand_bible:
+  influencer_name: "Lana"
+  visual_identity:
+    face_reference: "Heart-shaped face, high cheekbones, almond-shaped hazel eyes"
+    hair: "Long wavy honey-blonde hair with subtle highlights"
+    style: "Quiet Luxury / Minimalist Chic"
+    lighting: "Soft natural daylight, golden hour glow, high-key airy interiors"
+    clothing_preferences:
+      fashion: "Neutral tones (beige, cream, white), silk fabrics, tailored blazers, gold minimalist jewelry"
+      beauty: "Dewy skin, 'no-makeup' makeup look, nude glossy lips, groomed brows"
+  content_pillars:
+    - fashion
+    - beauty
+    - lifestyle
+  tone_of_voice: "Sophisticated yet accessible, inspiring, curated"
