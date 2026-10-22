@@ -59,8 +59,27 @@ st.markdown("Professional Influencer Management Dashboard")
 if os.path.exists('content_calendar.csv'):
     df = pd.read_csv('content_calendar.csv')
 else:
-    st.error("Content calendar not found!")
-    st.stop()
+    # Create a default content calendar if not found
+    st.info("📅 Content calendar not found. Creating a new one with sample data...")
+    default_data = {
+        'date': ['2026-10-25', '2026-10-26', '2026-10-27'],
+        'pillar': ['fashion', 'beauty', 'lifestyle'],
+        'concept': ['Autumn Vibes', 'Skin Glow', 'Morning Coffee'],
+        'hook': ['Must-have autumn looks', 'Get the perfect glow', 'My secret routine'],
+        'caption': ['Elevate your style', 'Dewy skin secrets', 'Slow morning vibes'],
+        'format': ['close_up', 'carousel', 'short_video'],
+        'visual_prompt': ['Lana in a beige blazer', 'Close up of skin', 'Lana drinking matcha'],
+        'product_id': ['', '', ''],
+        'qa_status': ['pending', 'pending', 'pending'],
+        'qa_notes': ['', '', ''],
+        'image_path': ['', '', ''],
+        'production_status': ['pending', 'pending', 'pending'],
+        'publish_status': ['draft', 'draft', 'draft'],
+        'published_at': ['', '', ''],
+        'content_id': ['LAN_100', 'LAN_101', 'LAN_102']
+    }
+    df = pd.DataFrame(default_data)
+    df.to_csv('content_calendar.csv', index=False)
 
 # --- SECTION 1: KPI DASHBOARD ---
 st.subheader("Analytics Overview")
