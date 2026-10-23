@@ -72,8 +72,17 @@ def get_enriched_prompt(visual_prompt, brand_bible, variation="", voice_tuning=N
     except (KeyError, TypeError):
         return f"{visual_prompt} {variation}"
 
+    # GROWTH ENGINE: Cinematic and Social-First Visual Directives
+    # We move from 'what to show' to 'how to film it for retention'
+    cinematic_directives = (
+        "CAMERA: Use dynamic angles (Dutch angle, extreme close-ups, rapid cuts). "
+        "EXPRESSIONS: Micro-expressions of confidence, irony, or surprise. "
+        "VISUAL CUES: Incorporate kinetic typography placeholders and visual tension. "
+        "PACING: High-energy composition that implies movement and rapid transitions. "
+    )
+
     base = (
-        f"High-end professional photography of {identity['influencer_name']}. "
+        f"High-end professional cinematography of {identity['influencer_name']}. "
         f"Physical characteristics: {identity['face_reference']}, {identity['hair']}. "
         f"Overall style: {identity['style']}. Lighting: {identity['lighting']}. "
     )
@@ -90,8 +99,8 @@ def get_enriched_prompt(visual_prompt, brand_bible, variation="", voice_tuning=N
 
         voice_addition = f" Mood/Tone: {tone}, Irony level: {irony_level}, Emoji frequency: {emoji_level}. "
 
-    detail = f"Scene details: {visual_prompt}. {variation} {voice_addition}"
-    footer = "8k resolution, cinematic, photorealistic, high fashion magazine quality, extreme detail."
+    detail = f"{cinematic_directives} Scene details: {visual_prompt}. {variation} {voice_addition}"
+    footer = "8k resolution, cinematic, photorealistic, high fashion magazine quality, extreme detail, social-first composition, high retention framing."
     return f"{base} {detail} {footer}"
 
 def safe_generate_image(client, prompt, creator_path):
