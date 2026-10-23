@@ -10,8 +10,8 @@
     "youtube": ""
   },
   "system_prompts": {
-    "viral_hook": "",
-    "conversion_style": ""
+    "viral_hook": "Create a high-energy, attention-grabbing hook that stops the scroll. Use psychological triggers, a strong promise of value, and a tone that perfectly matches the creator's niche. Focus on the first 3 seconds.",
+    "conversion_style": "Write a compelling call-to-action that feels natural and authentic. Drive the user toward the desired goal (link in bio, comment, or share) using a mix of urgency and soft-selling, keeping the influencer's unique voice."
   },
   "voice_tuning": {
     "irony": 50,
