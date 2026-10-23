@@ -1,0 +1,21 @@
+{
+  "profile": {
+    "name": "lana",
+    "niche": "General",
+    "photo_path": ""
+  },
+  "api_keys": {
+    "instagram": "",
+    "tiktok": "",
+    "youtube": ""
+  },
+  "system_prompts": {
+    "viral_hook": "",
+    "conversion_style": ""
+  },
+  "voice_tuning": {
+    "irony": 50,
+    "emoji_frequency": 50,
+    "tone": "Neutral"
+  }
+}

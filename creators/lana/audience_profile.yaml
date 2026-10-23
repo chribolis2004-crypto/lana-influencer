@@ -1,0 +1,23 @@
+audience_profile:
+  demographics:
+    age_range: 18-34
+    economic_status: Medium
+    gender: All
+    location: Global
+  funnel_strategy:
+    BoFu:
+      format: Posts
+      goal: Conversion
+      hook_strategy: Value education
+    MoFu:
+      format: Stories
+      goal: Engagement
+      hook_strategy: Authenticity
+    ToFu:
+      format: Reels
+      goal: Reach
+      hook_strategy: Visual impact
+  pain_points: []
+  psychographics:
+    interests: []
+    values: []
